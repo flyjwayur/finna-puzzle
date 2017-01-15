@@ -10,7 +10,9 @@
 (defonce game-state (atom {:text         "Hello world!"
                            :world-width  800
                            :world-height 600
-                           :game-div-id  "puzzle-game"}))
+                           :game-div-id  "puzzle-game"
+                           :piece_width 200
+                           :piece_height 200}))
 
 (println (:text @game-state))
 
@@ -18,7 +20,7 @@
   [game]
   (let [loader (:load game)]
     (doto loader
-      (pl/image "logo" "images/phaser.png"))))
+      (pl/spritesheet "logo" "images/phaser.png" (:piece_width @game-state) (:piece_height @game-state)))))
 
 (defn ^:private create
   [game]
