@@ -11,8 +11,8 @@
                            :world-width  800
                            :world-height 600
                            :game-div-id  "puzzle-game"
-                           :piece_width 200
-                           :piece_height 200}))
+                           :piece-width  200
+                           :piece-height 200}))
 
 (println (:text @game-state))
 
@@ -20,12 +20,20 @@
   [game]
   (let [loader (:load game)]
     (doto loader
-      (pl/spritesheet "logo" "images/phaser.png" (:piece_width @game-state) (:piece_height @game-state)))))
+      (pl/spritesheet "logo" "images/spritesheet.jpg" (:piece-width @game-state) (:piece-height @game-state)))))
 
 (defn ^:private create
   [game]
   (let [game-object-factory (:add game)
-        sprite (pgof/sprite game-object-factory 300 200 "logo")]))
+        board-rows (/ (:world-width @game-state) (:piece-width @game-state))
+        board-cols (/ (:world-height @game-state) (:piece-height @game-state))]
+    (doseq [col (range board-cols)
+            row (range board-rows)]
+      (pgof/sprite game-object-factory
+                   (* row (:piece-width @game-state))
+                   (* col (:piece-height @game-state))
+                   "logo"
+                   (+ (* col board-rows) row)))))
 
 (def build-states
   {:preload preload
