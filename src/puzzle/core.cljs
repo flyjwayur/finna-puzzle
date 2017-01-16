@@ -23,17 +23,19 @@
       (pl/spritesheet "logo" "images/spritesheet.jpg" (:piece-width @game-state) (:piece-height @game-state)))))
 
 (defn ^:private create
+  "Create randomized puzzle board"
   [game]
   (let [game-object-factory (:add game)
-        board-rows (/ (:world-width @game-state) (:piece-width @game-state))
-        board-cols (/ (:world-height @game-state) (:piece-height @game-state))]
+        board-rows          (/ (:world-width @game-state) (:piece-width @game-state))
+        board-cols          (/ (:world-height @game-state) (:piece-height @game-state))
+        shuffled-frame-num  (shuffle (range (* board-rows board-cols)))]
     (doseq [col (range board-cols)
             row (range board-rows)]
       (pgof/sprite game-object-factory
                    (* row (:piece-width @game-state))
                    (* col (:piece-height @game-state))
                    "logo"
-                   (+ (* col board-rows) row)))))
+                   (shuffled-frame-num (+ (* col board-rows) row))))))
 
 (def build-states
   {:preload preload
