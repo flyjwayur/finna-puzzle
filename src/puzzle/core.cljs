@@ -10,7 +10,9 @@
 (defonce game-state (atom {:text         "Hello world!"
                            :world-width  800
                            :world-height 600
-                           :game-div-id  "puzzle-game"}))
+                           :game-div-id  "puzzle-game"
+                           :piece-width  200
+                           :piece-height 200}))
 
 (println (:text @game-state))
 
@@ -18,12 +20,27 @@
   [game]
   (let [loader (:load game)]
     (doto loader
-      (pl/image "logo" "images/phaser.png"))))
+      (pl/spritesheet "logo" "images/spritesheet.jpg" (:piece-width @game-state) (:piece-height @game-state)))))
 
 (defn ^:private create
+  "Create randomized puzzle board with one black piece"
   [game]
   (let [game-object-factory (:add game)
-        sprite (pgof/sprite game-object-factory 300 200 "logo")]))
+        board-rows          (/ (:world-width @game-state) (:piece-width @game-state))
+        board-cols          (/ (:world-height @game-state) (:piece-height @game-state))
+        shuffled-frame-nums (shuffle (range (* board-rows board-cols)))]
+    (doseq [col (range board-cols)
+            row (range board-rows)]
+      (let [frame-number (shuffled-frame-nums (+ (* col board-rows) row))]
+        (if (= 1 frame-number)
+          (pgof/sprite game-object-factory
+                       (* row (:piece-width @game-state))
+                       (* col (:piece-height @game-state)))
+          (pgof/sprite game-object-factory
+                       (* row (:piece-width @game-state))
+                       (* col (:piece-height @game-state))
+                       "logo"
+                       frame-number))))))
 
 (def build-states
   {:preload preload
