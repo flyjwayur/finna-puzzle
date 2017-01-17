@@ -22,25 +22,28 @@
     (doto loader
       (pl/spritesheet "logo" "images/spritesheet.jpg" (:piece-width @game-state) (:piece-height @game-state)))))
 
-(defn ^:private create
+(defn ^:private init-board!
   "Create randomized puzzle board with one black piece"
-  [game]
-  (let [game-object-factory (:add game)
-        board-rows          (/ (:world-width @game-state) (:piece-width @game-state))
+  [gof]
+  (let [board-rows          (/ (:world-width @game-state) (:piece-width @game-state))
         board-cols          (/ (:world-height @game-state) (:piece-height @game-state))
         shuffled-frame-nums (shuffle (range (* board-rows board-cols)))]
     (doseq [col (range board-cols)
             row (range board-rows)]
       (let [frame-number (shuffled-frame-nums (+ (* col board-rows) row))]
         (if (= 1 frame-number)
-          (pgof/sprite game-object-factory
+          (pgof/sprite gof
                        (* row (:piece-width @game-state))
                        (* col (:piece-height @game-state)))
-          (pgof/sprite game-object-factory
+          (pgof/sprite gof
                        (* row (:piece-width @game-state))
                        (* col (:piece-height @game-state))
                        "logo"
                        frame-number))))))
+
+(defn ^:private create [game]
+  (let [game-object-factory (:add game)]
+    (init-board! game-object-factory)))
 
 (def build-states
   {:preload preload
