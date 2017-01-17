@@ -29,6 +29,22 @@
   (println (:name sprite))
   (println (get-in @game-state [:piece-coords (:name sprite)])))
 
+(defn- create-black-piece! [gof col row]
+  (pgof/sprite gof
+               (* col (:piece-width @game-state))
+               (* row (:piece-height @game-state))))
+
+(defn- create-puzzle-piece! [gof col row sprite-key frame-number]
+  (let [piece (pgof/sprite gof
+                           (* col (:piece-width @game-state))
+                           (* row (:piece-height @game-state))
+                           sprite-key
+                           frame-number)]
+    (pset! piece :name frame-number)
+    (swap! game-state assoc-in [:piece-coords (:name piece)] [row col])
+    (pset! piece :input-enabled true)
+    (psg/add (get-in piece [:events :on-input-down]) sprite-on-click piece)))
+
 (defn ^:private init-board!
   "Create randomized puzzle board with one black piece"
   [game]
@@ -38,20 +54,10 @@
         shuffled-frame-nums (shuffle (range (* board-rows board-cols)))]
     (doseq [row (range board-rows)
             col (range board-cols)]
-      (let [frame-number (shuffled-frame-nums (+ (* row board-cols) col))
-            piece        (if (= 1 frame-number)
-                           (pgof/sprite game-object-factory
-                                        (* col (:piece-width @game-state))
-                                        (* row (:piece-height @game-state)))
-                           (pgof/sprite game-object-factory
-                                        (* col (:piece-width @game-state))
-                                        (* row (:piece-height @game-state))
-                                        "logo"
-                                        frame-number))]
-        (pset! piece :name (str frame-number))
-        (swap! game-state assoc-in [:piece-coords (:name piece)] [row col])
-        (pset! piece :input-enabled true)
-        (psg/add (get-in piece [:events :on-input-down]) sprite-on-click piece)))))
+      (let [frame-number (shuffled-frame-nums (+ (* row board-cols) col))]
+        (if (= 1 frame-number)
+          (create-black-piece! game-object-factory col row)
+          (create-puzzle-piece! game-object-factory col row "logo" frame-number))))))
 
 (defn- create [game]
   (init-board! game))
