@@ -14,7 +14,8 @@
                            :game-div-id  "puzzle-game"
                            :piece-width  200
                            :piece-height 200
-                           :piece-coords {}}))
+                           :piece-coords {}
+                           :black-coord  []}))
 
 (println (:text @game-state))
 
@@ -27,12 +28,14 @@
 (defn- sprite-on-click
   [sprite]
   (println (:name sprite))
-  (println (get-in @game-state [:piece-coords (:name sprite)])))
+  (println (get-in @game-state [:piece-coords (:name sprite)]))
+  (println (:black-coord @game-state)))
 
 (defn- create-black-piece! [gof col row]
-  (pgof/sprite gof
-               (* col (:piece-width @game-state))
-               (* row (:piece-height @game-state))))
+  (let [black (pgof/sprite gof
+                           (* col (:piece-width @game-state))
+                           (* row (:piece-height @game-state)))]
+    (swap! game-state assoc :black-coord [row col])))
 
 (defn- create-puzzle-piece! [gof col row sprite-key frame-number]
   (let [piece (pgof/sprite gof
