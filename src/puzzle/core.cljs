@@ -13,7 +13,8 @@
                            :world-height 600
                            :game-div-id  "puzzle-game"
                            :piece-width  200
-                           :piece-height 200}))
+                           :piece-height 200
+                           :piece-coords {}}))
 
 (println (:text @game-state))
 
@@ -25,32 +26,34 @@
 
 (defn- sprite-on-click
   [sprite]
-  (println (:name sprite)))
+  (println (:name sprite))
+  (println (get-in @game-state [:piece-coords (:name sprite)])))
 
 (defn ^:private init-board!
   "Create randomized puzzle board with one black piece"
   [game]
   (let [game-object-factory (:add game)
-        board-rows          (/ (:world-width @game-state) (:piece-width @game-state))
-        board-cols          (/ (:world-height @game-state) (:piece-height @game-state))
+        board-cols          (/ (:world-width @game-state) (:piece-width @game-state))
+        board-rows          (/ (:world-height @game-state) (:piece-height @game-state))
         shuffled-frame-nums (shuffle (range (* board-rows board-cols)))]
-    (doseq [col (range board-cols)
-            row (range board-rows)]
-      (let [frame-number (shuffled-frame-nums (+ (* col board-rows) row))
+    (doseq [row (range board-rows)
+            col (range board-cols)]
+      (let [frame-number (shuffled-frame-nums (+ (* row board-cols) col))
             piece        (if (= 1 frame-number)
                            (pgof/sprite game-object-factory
-                                        (* row (:piece-width @game-state))
-                                        (* col (:piece-height @game-state)))
+                                        (* col (:piece-width @game-state))
+                                        (* row (:piece-height @game-state)))
                            (pgof/sprite game-object-factory
-                                        (* row (:piece-width @game-state))
-                                        (* col (:piece-height @game-state))
+                                        (* col (:piece-width @game-state))
+                                        (* row (:piece-height @game-state))
                                         "logo"
                                         frame-number))]
-        (pset! piece :name (str "piece" frame-number))
+        (pset! piece :name (str frame-number))
+        (swap! game-state assoc-in [:piece-coords (:name piece)] [row col])
         (pset! piece :input-enabled true)
         (psg/add (get-in piece [:events :on-input-down]) sprite-on-click piece)))))
 
-(defn ^:private create [game]
+(defn- create [game]
   (init-board! game))
 
 (def build-states
