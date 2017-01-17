@@ -25,11 +25,18 @@
     (doto loader
       (pl/spritesheet "logo" "images/spritesheet.jpg" (:piece-width @game-state) (:piece-height @game-state)))))
 
+(defn- can-move [black-coord piece-coord]
+  (or (and (= (inc (black-coord 0)) (piece-coord 0)) (= (black-coord 1) (piece-coord 1)))
+      (and (= (dec (black-coord 0)) (piece-coord 0)) (= (black-coord 1) (piece-coord 1)))
+      (and (= (inc (black-coord 1)) (piece-coord 1)) (= (black-coord 0) (piece-coord 0)))
+      (and (= (dec (black-coord 1)) (piece-coord 1)) (= (black-coord 0) (piece-coord 0)))))
+
 (defn- sprite-on-click
   [sprite]
   (println (:name sprite))
   (println (get-in @game-state [:piece-coords (:name sprite)]))
-  (println (:black-coord @game-state)))
+  (println (:black-coord @game-state))
+  (println (can-move (:black-coord @game-state) (get-in @game-state [:piece-coords (:name sprite)]))))
 
 (defn- create-black-piece! [gof col row]
   (let [black (pgof/sprite gof
