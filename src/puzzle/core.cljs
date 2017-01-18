@@ -3,11 +3,12 @@
             [phzr.game :as pg]
             [phzr.game-object-factory :as pgof]
             [phzr.loader :as pl]
-            [phzr.signal :as psg]))
+            [phzr.signal :as psg]
+            [phzr.tween :as ptwn]))
 
 (enable-console-print!)
 
-;; define your app data so that it doesn't get over-written on reload
+;; define your game state so that it doesn't get over-written on reload
 (defonce game-state (atom {:text         "Hello world!"
                            :world-width  800
                            :world-height 600
@@ -32,11 +33,15 @@
       (and (= (dec (black-coord 1)) (piece-coord 1)) (= (black-coord 0) (piece-coord 0)))))
 
 (defn- sprite-on-click
-  [sprite]
-  (println (:name sprite))
-  (println (get-in @game-state [:piece-coords (:name sprite)]))
-  (println (:black-coord @game-state))
-  (println (can-move (:black-coord @game-state) (get-in @game-state [:piece-coords (:name sprite)]))))
+  [piece event game]
+  (let [gof         (:add game)
+        tween       (pgof/tween gof piece)
+        black-coord (:black-coord @game-state)
+        black-x     (* (:piece-width @game-state) (black-coord 1))
+        black-y     (* (:piece-height @game-state) (black-coord 0))
+        piece-coord (get-in @game-state [:piece-coords (:name piece)])]
+    (when (can-move black-coord piece-coord)
+      (ptwn/to tween {:x black-x :y black-y} 400 "Linear" true))))
 
 (defn- create-black-piece! [gof col row]
   (let [black (pgof/sprite gof
@@ -44,8 +49,9 @@
                            (* row (:piece-height @game-state)))]
     (swap! game-state assoc :black-coord [row col])))
 
-(defn- create-puzzle-piece! [gof col row sprite-key frame-number]
-  (let [piece (pgof/sprite gof
+(defn- create-puzzle-piece! [game col row sprite-key frame-number]
+  (let [gof   (:add game)
+        piece (pgof/sprite gof
                            (* col (:piece-width @game-state))
                            (* row (:piece-height @game-state))
                            sprite-key
@@ -53,7 +59,7 @@
     (pset! piece :name frame-number)
     (swap! game-state assoc-in [:piece-coords (:name piece)] [row col])
     (pset! piece :input-enabled true)
-    (psg/add (get-in piece [:events :on-input-down]) sprite-on-click piece)))
+    (psg/add (get-in piece [:events :on-input-down]) sprite-on-click piece 0 game)))
 
 (defn ^:private init-board!
   "Create randomized puzzle board with one black piece"
@@ -67,7 +73,7 @@
       (let [frame-number (shuffled-frame-nums (+ (* row board-cols) col))]
         (if (= 1 frame-number)
           (create-black-piece! game-object-factory col row)
-          (create-puzzle-piece! game-object-factory col row "logo" frame-number))))))
+          (create-puzzle-piece! game col row "logo" frame-number))))))
 
 (defn- create [game]
   (init-board! game))
