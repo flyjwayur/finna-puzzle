@@ -4,7 +4,8 @@
             [phzr.game-object-factory :as pgof]
             [phzr.loader :as pl]
             [phzr.signal :as psg]
-            [phzr.tween :as ptwn]))
+            [phzr.tween :as ptwn]
+            [phzr.point :as ppo]))
 
 (enable-console-print!)
 
@@ -25,6 +26,18 @@
   (let [loader (:load game)]
     (doto loader
       (pl/spritesheet "logo" "images/spritesheet.jpg" (:piece-width @game-state) (:piece-height @game-state)))))
+
+(defn- display-success-text [game]
+  (let [style   {:font "40px Arial" :fill "#ff0000" :align "center"}
+        gof     (:add game)
+        world-x (get-in game [:world :center-x])
+        world-y (get-in game [:world :center-y])
+        text    (pgof/text gof
+                           world-x
+                           world-y
+                           "Congratulations! \nYou made it!"
+                           style)]
+    (pset! text :anchor (ppo/->Point 0.5 0.5))))
 
 (defn- solved? []
   "Returns boolean for whether puzzle is solved"
@@ -50,7 +63,8 @@
     (when (can-move black-coord piece-coord)
       (swap! game-state assoc :black-coord piece-coord)
       (swap! game-state assoc-in [:piece-coords (:name piece)] black-coord)
-      (ptwn/to tween {:x black-x :y black-y} 400 "Linear" true))))
+      (ptwn/to tween {:x black-x :y black-y} 400 "Linear" true)
+      (when (solved?) (display-success-text game)))))
 
 (defn- create-black-piece! [gof col row]
   (let [black (pgof/sprite gof
