@@ -41,6 +41,8 @@
         black-y     (* (:piece-height @game-state) (black-coord 0))
         piece-coord (get-in @game-state [:piece-coords (:name piece)])]
     (when (can-move black-coord piece-coord)
+      (swap! game-state assoc :black-coord piece-coord)
+      (swap! game-state assoc-in [:piece-coords (:name piece)] black-coord)
       (ptwn/to tween {:x black-x :y black-y} 400 "Linear" true))))
 
 (defn- create-black-piece! [gof col row]
