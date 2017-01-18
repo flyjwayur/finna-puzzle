@@ -26,6 +26,13 @@
     (doto loader
       (pl/spritesheet "logo" "images/spritesheet.jpg" (:piece-width @game-state) (:piece-height @game-state)))))
 
+(defn- solved? []
+  "Returns boolean for whether puzzle is solved"
+  (every? (fn [[frame-num coord]]
+            (let [board-cols (/ (:world-width @game-state) (:piece-width @game-state))]
+              (= frame-num (+ (* (coord 0) board-cols) (coord 1)))))
+          (:piece-coords @game-state)))
+
 (defn- can-move [black-coord piece-coord]
   (or (and (= (inc (black-coord 0)) (piece-coord 0)) (= (black-coord 1) (piece-coord 1)))
       (and (= (dec (black-coord 0)) (piece-coord 0)) (= (black-coord 1) (piece-coord 1)))
