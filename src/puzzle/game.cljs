@@ -11,6 +11,7 @@
 
 ;; define your game state so that it doesn't get over-written on reload
 (defonce game-state (atom {:text         "Hello world!"
+                           :puzzle-image ""
                            :world-width  800
                            :world-height 600
                            :game-div-id  "puzzle-game"
@@ -25,7 +26,7 @@
   [game]
   (let [loader (:load game)]
     (doto loader
-      (pl/spritesheet "logo" "images/spritesheet.jpg" (:piece-width @game-state) (:piece-height @game-state)))))
+      (pl/spritesheet "logo" (str "https://api.finna.fi" (:puzzle-image @game-state)) (:piece-width @game-state) (:piece-height @game-state)))))
 
 (defn- display-success-text [game]
   (let [style   {:font "40px Arial" :fill "#ff0000" :align "center"}
@@ -105,9 +106,10 @@
   {:preload preload
    :create  create})
 
-(defn start-puzzle []
+(defn start-puzzle [puzzle-image]
+  (swap! game-state assoc :puzzle-image puzzle-image)
   (pg/->Game (:world-width @game-state)
              (:world-height @game-state)
-             (p/phaser-constants :auto)
+             (p/phaser-constants :canvas)
              (:game-div-id @game-state)
              build-states))
