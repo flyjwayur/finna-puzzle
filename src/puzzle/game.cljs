@@ -12,11 +12,13 @@
 ;; define your game state so that it doesn't get over-written on reload
 (defonce game-state (atom {:text         "Hello world!"
                            :puzzle-image ""
-                           :world-width  800
-                           :world-height 600
+                           :world-width  0
+                           :world-height 0
                            :game-div-id  "puzzle-game"
-                           :piece-width  200
-                           :piece-height 200
+                           :board-cols   3
+                           :board-rows   3
+                           :piece-width  0
+                           :piece-height 0
                            :piece-coords {}
                            :black-coord  []}))
 
@@ -89,8 +91,8 @@
   "Create randomized puzzle board with one black piece"
   [game]
   (let [game-object-factory (:add game)
-        board-cols          (/ (:world-width @game-state) (:piece-width @game-state))
-        board-rows          (/ (:world-height @game-state) (:piece-height @game-state))
+        board-cols          (:board-cols @game-state)
+        board-rows          (:board-rows @game-state)
         shuffled-frame-nums (shuffle (range (* board-rows board-cols)))]
     (doseq [row (range board-rows)
             col (range board-cols)]
@@ -106,10 +108,29 @@
   {:preload preload
    :create  create})
 
-(defn start-puzzle [puzzle-image]
-  (swap! game-state assoc :puzzle-image puzzle-image)
+(defn- start-game []
   (pg/->Game (:world-width @game-state)
              (:world-height @game-state)
              (p/phaser-constants :canvas)
              (:game-div-id @game-state)
              build-states))
+
+(defn- get-image-size-and-start-game [url]
+  (let [image (js/Image.)]
+    (.addEventListener image
+                       "load"
+                       (fn [event]
+                         (let [image-width  (.-naturalWidth (.-target event))
+                               image-height (.-naturalHeight (.-target event))
+                               board-rows   (:board-rows @game-state)
+                               board-cols   (:board-cols @game-state)]
+                           (swap! game-state assoc :world-width image-width)
+                           (swap! game-state assoc :world-height image-height)
+                           (swap! game-state assoc :piece-width (js/Math.floor (/ image-width board-cols)))
+                           (swap! game-state assoc :piece-height (js/Math.floor (/ image-height board-rows)))
+                           (start-game))))
+    (set! (.-src image) (str "https://api.finna.fi" url))))
+
+(defn start-puzzle [puzzle-image]
+  (swap! game-state assoc :puzzle-image puzzle-image)
+  (get-image-size-and-start-game puzzle-image))
