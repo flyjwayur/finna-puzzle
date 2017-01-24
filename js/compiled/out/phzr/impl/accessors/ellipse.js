@@ -1,0 +1,7 @@
+// Compiled by ClojureScript 1.9.229 {}
+goog.provide('phzr.impl.accessors.ellipse');
+goog.require('cljs.core');
+phzr.impl.accessors.ellipse.ellipse_get_properties = cljs.core.PersistentHashMap.fromArrays([new cljs.core.Keyword(null,"y","y",-1757859776),new cljs.core.Keyword(null,"bottom","bottom",-1550509018),new cljs.core.Keyword(null,"top","top",-1856271961),new cljs.core.Keyword(null,"width","width",-384071477),new cljs.core.Keyword(null,"type","type",1174270348),new cljs.core.Keyword(null,"empty","empty",767870958),new cljs.core.Keyword(null,"right","right",-452581833),new cljs.core.Keyword(null,"x","x",2099068185),new cljs.core.Keyword(null,"height","height",1025178622),new cljs.core.Keyword(null,"left","left",-399115937)],["y","bottom","top","width","type","empty","right","x","height","left"]);
+phzr.impl.accessors.ellipse.ellipse_set_properties = cljs.core.PersistentHashMap.fromArrays([new cljs.core.Keyword(null,"y","y",-1757859776),new cljs.core.Keyword(null,"bottom","bottom",-1550509018),new cljs.core.Keyword(null,"top","top",-1856271961),new cljs.core.Keyword(null,"width","width",-384071477),new cljs.core.Keyword(null,"empty","empty",767870958),new cljs.core.Keyword(null,"right","right",-452581833),new cljs.core.Keyword(null,"x","x",2099068185),new cljs.core.Keyword(null,"height","height",1025178622),new cljs.core.Keyword(null,"left","left",-399115937)],["y","bottom","top","width","empty","right","x","height","left"]);
+
+//# sourceMappingURL=ellipse.js.map?rel=1485300058657

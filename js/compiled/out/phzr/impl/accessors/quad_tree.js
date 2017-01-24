@@ -1,0 +1,7 @@
+// Compiled by ClojureScript 1.9.229 {}
+goog.provide('phzr.impl.accessors.quad_tree');
+goog.require('cljs.core');
+phzr.impl.accessors.quad_tree.quad_tree_get_properties = new cljs.core.PersistentArrayMap(null, 6, [new cljs.core.Keyword(null,"bounds","bounds",1691609455),"bounds",new cljs.core.Keyword(null,"level","level",1290497552),"level",new cljs.core.Keyword(null,"max-levels","max-levels",-1678360932),"maxLevels",new cljs.core.Keyword(null,"max-objects","max-objects",-441889834),"maxObjects",new cljs.core.Keyword(null,"nodes","nodes",-2099585805),"nodes",new cljs.core.Keyword(null,"objects","objects",2099713734),"objects"], null);
+phzr.impl.accessors.quad_tree.quad_tree_set_properties = new cljs.core.PersistentArrayMap(null, 6, [new cljs.core.Keyword(null,"bounds","bounds",1691609455),"bounds",new cljs.core.Keyword(null,"level","level",1290497552),"level",new cljs.core.Keyword(null,"max-levels","max-levels",-1678360932),"maxLevels",new cljs.core.Keyword(null,"max-objects","max-objects",-441889834),"maxObjects",new cljs.core.Keyword(null,"nodes","nodes",-2099585805),"nodes",new cljs.core.Keyword(null,"objects","objects",2099713734),"objects"], null);
+
+//# sourceMappingURL=quad_tree.js.map?rel=1485300064222

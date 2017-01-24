@@ -1,0 +1,7 @@
+// Compiled by ClojureScript 1.9.229 {}
+goog.provide('phzr.impl.accessors.timer_event');
+goog.require('cljs.core');
+phzr.impl.accessors.timer_event.timer_event_get_properties = new cljs.core.PersistentArrayMap(null, 7, [new cljs.core.Keyword(null,"args","args",1315556576),"args",new cljs.core.Keyword(null,"callback","callback",-705136228),"callback",new cljs.core.Keyword(null,"callback-context","callback-context",-404125994),"callbackContext",new cljs.core.Keyword(null,"delay","delay",-574225219),"delay",new cljs.core.Keyword(null,"loop","loop",-395552849),"loop",new cljs.core.Keyword(null,"repeat-count","repeat-count",-274354817),"repeatCount",new cljs.core.Keyword(null,"tick","tick",-835886976),"tick"], null);
+phzr.impl.accessors.timer_event.timer_event_set_properties = new cljs.core.PersistentArrayMap(null, 7, [new cljs.core.Keyword(null,"args","args",1315556576),"args",new cljs.core.Keyword(null,"callback","callback",-705136228),"callback",new cljs.core.Keyword(null,"callback-context","callback-context",-404125994),"callbackContext",new cljs.core.Keyword(null,"delay","delay",-574225219),"delay",new cljs.core.Keyword(null,"loop","loop",-395552849),"loop",new cljs.core.Keyword(null,"repeat-count","repeat-count",-274354817),"repeatCount",new cljs.core.Keyword(null,"tick","tick",-835886976),"tick"], null);
+
+//# sourceMappingURL=timer_event.js.map?rel=1485300059320

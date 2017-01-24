@@ -1,0 +1,7 @@
+// Compiled by ClojureScript 1.9.229 {}
+goog.provide('phzr.impl.accessors.pixi.base_texture');
+goog.require('cljs.core');
+phzr.impl.accessors.pixi.base_texture.base_texture_get_properties = cljs.core.PersistentHashMap.fromArrays([new cljs.core.Keyword(null,"image-url","image-url",-1064784064),new cljs.core.Keyword(null,"has-loaded","has-loaded",-1978606303),new cljs.core.Keyword(null,"scale-mode","scale-mode",1801909158),new cljs.core.Keyword(null,"width","width",-384071477),new cljs.core.Keyword(null,"mipmap","mipmap",-2136696500),new cljs.core.Keyword(null,"premultiplied-alpha","premultiplied-alpha",-307675636),new cljs.core.Keyword(null,"source","source",-433931539),new cljs.core.Keyword(null,"resolution","resolution",-756075601),new cljs.core.Keyword(null,"height","height",1025178622)],["imageUrl","hasLoaded","scaleMode","width","mipmap","premultipliedAlpha","source","resolution","height"]);
+phzr.impl.accessors.pixi.base_texture.base_texture_set_properties = new cljs.core.PersistentArrayMap(null, 6, [new cljs.core.Keyword(null,"image-url","image-url",-1064784064),"imageUrl",new cljs.core.Keyword(null,"mipmap","mipmap",-2136696500),"mipmap",new cljs.core.Keyword(null,"premultiplied-alpha","premultiplied-alpha",-307675636),"premultipliedAlpha",new cljs.core.Keyword(null,"resolution","resolution",-756075601),"resolution",new cljs.core.Keyword(null,"scale-mode","scale-mode",1801909158),"scaleMode",new cljs.core.Keyword(null,"source","source",-433931539),"source"], null);
+
+//# sourceMappingURL=base_texture.js.map?rel=1485300062929

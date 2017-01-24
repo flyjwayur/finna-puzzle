@@ -1,0 +1,7 @@
+// Compiled by ClojureScript 1.9.229 {}
+goog.provide('phzr.impl.accessors.image_collection');
+goog.require('cljs.core');
+phzr.impl.accessors.image_collection.image_collection_get_properties = cljs.core.PersistentHashMap.fromArrays([new cljs.core.Keyword(null,"properties","properties",685819552),new cljs.core.Keyword(null,"image-width","image-width",737630851),new cljs.core.Keyword(null,"firstgid","firstgid",1659571107),new cljs.core.Keyword(null,"images","images",1757475080),new cljs.core.Keyword(null,"name","name",1843675177),new cljs.core.Keyword(null,"image-height","image-height",-1587384498),new cljs.core.Keyword(null,"image-margin","image-margin",1706677519),new cljs.core.Keyword(null,"total","total",1916810418),new cljs.core.Keyword(null,"image-spacing","image-spacing",-227304909)],["properties","imageWidth","firstgid","images","name","imageHeight","imageMargin","total","imageSpacing"]);
+phzr.impl.accessors.image_collection.image_collection_set_properties = new cljs.core.PersistentArrayMap(null, 3, [new cljs.core.Keyword(null,"firstgid","firstgid",1659571107),"firstgid",new cljs.core.Keyword(null,"name","name",1843675177),"name",new cljs.core.Keyword(null,"properties","properties",685819552),"properties"], null);
+
+//# sourceMappingURL=image_collection.js.map?rel=1485300064544

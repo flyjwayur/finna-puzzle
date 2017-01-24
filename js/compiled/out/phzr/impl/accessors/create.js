@@ -1,0 +1,8 @@
+// Compiled by ClojureScript 1.9.229 {}
+goog.provide('phzr.impl.accessors.create');
+goog.require('cljs.core');
+phzr.impl.accessors.create.create_constants = new cljs.core.PersistentArrayMap(null, 5, [new cljs.core.Keyword(null,"palette-arne","palette-arne",577616905),"PALETTE_ARNE",new cljs.core.Keyword(null,"palette-c64","palette-c64",535301251),"PALETTE_C64",new cljs.core.Keyword(null,"palette-cga","palette-cga",1137986979),"PALETTE_CGA",new cljs.core.Keyword(null,"palette-japanese-machine","palette-japanese-machine",-675885724),"PALETTE_JAPANESE_MACHINE",new cljs.core.Keyword(null,"palette-jmp","palette-jmp",1989762513),"PALETTE_JMP"], null);
+phzr.impl.accessors.create.create_get_properties = new cljs.core.PersistentArrayMap(null, 5, [new cljs.core.Keyword(null,"bmd","bmd",-486762632),"bmd",new cljs.core.Keyword(null,"canvas","canvas",-1798817489),"canvas",new cljs.core.Keyword(null,"ctx","ctx",-493610118),"ctx",new cljs.core.Keyword(null,"game","game",-441523833),"game",new cljs.core.Keyword(null,"palettes","palettes",-1924812604),"palettes"], null);
+phzr.impl.accessors.create.create_set_properties = new cljs.core.PersistentArrayMap(null, 5, [new cljs.core.Keyword(null,"bmd","bmd",-486762632),"bmd",new cljs.core.Keyword(null,"canvas","canvas",-1798817489),"canvas",new cljs.core.Keyword(null,"ctx","ctx",-493610118),"ctx",new cljs.core.Keyword(null,"game","game",-441523833),"game",new cljs.core.Keyword(null,"palettes","palettes",-1924812604),"palettes"], null);
+
+//# sourceMappingURL=create.js.map?rel=1485300063793

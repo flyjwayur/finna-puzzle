@@ -1,0 +1,7 @@
+// Compiled by ClojureScript 1.9.229 {}
+goog.provide('phzr.impl.accessors.tileset');
+goog.require('cljs.core');
+phzr.impl.accessors.tileset.tileset_get_properties = cljs.core.PersistentHashMap.fromArrays([new cljs.core.Keyword(null,"properties","properties",685819552),new cljs.core.Keyword(null,"firstgid","firstgid",1659571107),new cljs.core.Keyword(null,"columns","columns",1998437288),new cljs.core.Keyword(null,"name","name",1843675177),new cljs.core.Keyword(null,"tile-width","tile-width",-1131996343),new cljs.core.Keyword(null,"rows","rows",850049680),new cljs.core.Keyword(null,"total","total",1916810418),new cljs.core.Keyword(null,"image","image",-58725096),new cljs.core.Keyword(null,"tile-spacing","tile-spacing",-47926374),new cljs.core.Keyword(null,"tile-margin","tile-margin",-1805621316),new cljs.core.Keyword(null,"tile-height","tile-height",-905667651)],["properties","firstgid","columns","name","tileWidth","rows","total","image","tileSpacing","tileMargin","tileHeight"]);
+phzr.impl.accessors.tileset.tileset_set_properties = new cljs.core.PersistentArrayMap(null, 3, [new cljs.core.Keyword(null,"firstgid","firstgid",1659571107),"firstgid",new cljs.core.Keyword(null,"name","name",1843675177),"name",new cljs.core.Keyword(null,"properties","properties",685819552),"properties"], null);
+
+//# sourceMappingURL=tileset.js.map?rel=1485300058579

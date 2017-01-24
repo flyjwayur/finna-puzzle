@@ -1,0 +1,7 @@
+// Compiled by ClojureScript 1.9.229 {}
+goog.provide('phzr.impl.accessors.audio_sprite');
+goog.require('cljs.core');
+phzr.impl.accessors.audio_sprite.audio_sprite_get_properties = new cljs.core.PersistentArrayMap(null, 6, [new cljs.core.Keyword(null,"autoplay","autoplay",-1319501991),"autoplay",new cljs.core.Keyword(null,"autoplay-key","autoplay-key",-1416987484),"autoplayKey",new cljs.core.Keyword(null,"config","config",994861415),"config",new cljs.core.Keyword(null,"game","game",-441523833),"game",new cljs.core.Keyword(null,"key","key",-1516042587),"key",new cljs.core.Keyword(null,"sounds","sounds",1244211385),"sounds"], null);
+phzr.impl.accessors.audio_sprite.audio_sprite_set_properties = new cljs.core.PersistentArrayMap(null, 6, [new cljs.core.Keyword(null,"autoplay","autoplay",-1319501991),"autoplay",new cljs.core.Keyword(null,"autoplay-key","autoplay-key",-1416987484),"autoplayKey",new cljs.core.Keyword(null,"config","config",994861415),"config",new cljs.core.Keyword(null,"game","game",-441523833),"game",new cljs.core.Keyword(null,"key","key",-1516042587),"key",new cljs.core.Keyword(null,"sounds","sounds",1244211385),"sounds"], null);
+
+//# sourceMappingURL=audio_sprite.js.map?rel=1485300058966
